@@ -28,13 +28,16 @@ int height(node *root){
         return 1;
     return ((max(height(root->left),height(root->right))) + 1);
 }
-void print_node(node *root,int ht, int dir,int counter){
-    if(dir == 0){
+//Direction 0->left, 1->right
+void print_node(node *root,int ht, int direction,int counter){
+    if(direction == 0){
+        //print all the left nodes starting from the last left node
         if(root == NULL) return;
         print_node(root->left,ht-1,0,counter);
         printf("%d ",root->data);
     }
     else {
+        //print all the right nodes while going down the tree
         if(root == NULL) return;
         if(counter != ht) {
             printf("%d ",root->data);
