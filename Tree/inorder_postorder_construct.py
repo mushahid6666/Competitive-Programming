@@ -21,6 +21,7 @@ class Solution:
         #find parent element index from inorder
         k = inorder.index(val)
 
+        # Split the postorder based on left and right subtree from inrder
         p.left = self.constructTree(postorder,poststart-(inend-k)-1,postend,inorder,instart,k-1)
         p.right = self.constructTree(postorder,poststart-1,postend+(k-instart), inorder,k+1,inend)
         return p
