@@ -28,24 +28,43 @@ class Solution:
         if(root.left==None and root.right==None):
             if self.presentsum==sum:
                 self.flag=1
-        if(root.left!=None or root.right!=None):
-            if self.stack[self.top]!= root:
+                return
+        if(root.right!=None):
+            while self.stack[self.top]!= root:
                 self.popstack()
+                if self.top==-1:
+                    break
         self.inorder(root.right,sum)
 
 
     def hasPathSum(self, A, B):
+        self.stack = []
+        self.top = -1
+        self.flag = 0
+        self.presentsum = 0
         self.inorder(A,B)
         if self.flag==1:
             return 1
         return 0
 
 obj = Solution()
-A = Treenode(5)
-A.left = Treenode(1000)
-A.left.right = Treenode(10)
-A.right = Treenode(2)
-A.right.left = Treenode(6)
-A.right.right = Treenode(5)
+A = Treenode(-2)
+A.right = Treenode(-3)
 
-print obj.hasPathSum(A,2)
+# A = Treenode(5)
+# A.left = Treenode(0)
+# A.left.left = Treenode(0)
+# A.left.left.left = Treenode(1)
+# A.left.left.right = Treenode(2)
+# A.left.right = Treenode(0)
+# A.left.right.left = Treenode(0)
+# A.left.right.right = Treenode(0)
+# A.right = Treenode(2)
+# A.right.left = Treenode(6)
+# A.right.right = Treenode(5)
+# A.right.left.left = Treenode(7)
+# A.right.left.right = Treenode(8)
+# A.right.right.left = Treenode(9)
+# A.right.right.right = Treenode(10)
+
+print obj.hasPathSum(A,-3)
