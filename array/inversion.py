@@ -8,19 +8,20 @@ class Solution:
             return b
 
     def countInversions(self, A):
+        subarr = []
         count = 0
         for i in range(0,len(A)):
-            k = i+1
-            temp  = A[i+1:]
-            temp.sort()
-            # print(temp)
-            for j in range(0,len(temp)):
-                # print("found",A[i],A[j])
-                if A[i] > temp[j]:
-                    count+=1
-                    # print("found",A[i],A[j])
-                else:
-                    break
+            if i == len(A)-1:
+                break
+            subarr = A[i+1:]
+            subarr.sort()
+            n = len(subarr)
+            j=0
+            while j<n and A[i] > subarr[j]:
+                # print(A[i],subarr[n-1-j])
+                count+=1
+                j+=1
+            # print(subarr)
         return count
             
         

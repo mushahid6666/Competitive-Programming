@@ -37,10 +37,10 @@ class Solution:
                     break
         self.inorder(root.right, sum)
 
-    # @param root : root node of tree
-    # @param sum1 : integer
-    # @return a list of list of integers
     def pathSum(self, root, sum1):
+        # @param root : root node of tree
+        # @param sum1 : integer
+        # @return a list of list of integers
         self.pathlist = []
         self.stack = []
         self.top = -1

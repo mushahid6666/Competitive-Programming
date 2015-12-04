@@ -24,8 +24,12 @@ Node* newnode(int data)
 
 Node* findLCAUtil(Node *root, int n1, int n2, int *v1, int *v2)
 {
+    // Base case
     if(root == NULL) return NULL;
 
+    // If either n1 or n2 matches with root's key, report
+    // the presence by returning root (Note that if a key is
+    // ancestor of other, then the ancestor key becomes LCA
     if(root->data == n1) {
         *v1 = true;
         return root;
@@ -36,12 +40,17 @@ Node* findLCAUtil(Node *root, int n1, int n2, int *v1, int *v2)
         return root;
     }
 
+    // Look for keys in left and right subtrees
     Node *leftLCA = findLCAUtil(root->left, n1, n2, v1, v2);
     Node *rightLCA = findLCAUtil(root->right, n1, n2, v1, v2);
 
+    // If both of the above calls return Non-NULL, then one key
+    // is present in once subtree and other is present in other,
+    // So this node is the LCA
     if(leftLCA && rightLCA)
         return root;
 
+    // Otherwise check if left subtree or right subtree is LCA
     return (leftLCA != NULL)?leftLCA:rightLCA;
 }
 
@@ -63,6 +72,10 @@ Node* findLCA(Node* root , int n1, int n2)
 {
     int v1 = false;
     int v2 = false;
+    if(!find(root, n1))
+        return -1;
+    if(!find(root, n2))
+        return -1;
 
     Node* temp = findLCAUtil(root, n1, n2, &v1, &v2);
 
@@ -82,7 +95,7 @@ int main()
     root->right->left = newnode(6);
     root->right->right = newnode(7);
 
-    printf("LCA(4, 5) = %d",findLCA(root, 4, 5)->data);
+    printf("LCA(4, 10) = %d",findLCA(root, 4, 10)->data);
     printf("\nLCA(4, 6) = %d",findLCA(root, 4, 6)->data);
     printf("\nLCA(3, 4) = %d",findLCA(root, 3, 4)->data);
     printf("\nLCA(2, 4) = %d",findLCA(root, 2, 4)->data);
