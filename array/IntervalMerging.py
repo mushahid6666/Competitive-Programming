@@ -17,20 +17,31 @@ class Solution:
             return 0
 
     def merge(self, intervals):
+        if len(intervals) < 1:
+            return intervals
         intervals.sort(self.compare)
+        reslist = []
         index = 0
-        for i in range(0,len(intervals)):
-            if index!=0 and intervals[index-1].start <= intervals[i].end:
-                intervals[index-1].start,/423
+        prev = intervals[0]
+        for i in range(1, len(intervals)):
+            current = intervals[i]
+            if prev.end >= current.start:
+                temp = Interval(prev.start, max(prev.end, current.end))
+                prev = temp
+            else:
+                reslist.append(prev)
+                prev = current
+            pass
+        reslist.append(prev)
+        pass
 
 A = Solution()
-B = Interval(1,3)
-C = Interval(2,6)
-D = Interval(8,10)
-E = Interval(15,18)
-F = Interval(1,6)
-G = Interval(8,10)
-H = Interval(15,18)
-listinterval = [B,C,D,E,F,G,H]
+B = Interval(1, 10)
+C = Interval(2, 9)
+D = Interval(3, 8)
+E = Interval(4, 7)
+F = Interval(5, 6)
+G = Interval(6, 6)
+listinterval = [B, C, D, E, F, G]
 A.merge(listinterval)
-
+pass
