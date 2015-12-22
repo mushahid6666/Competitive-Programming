@@ -69,28 +69,28 @@ class Solution:
                 root.right = None
             else:
                 root.right = inorder[index + 1:]
-        if root.left != None:
-            lt = len(root.left)
-            root.left = self.constructTree(preorder, root.left, prestart + 1)
+        if root.right != None:
+            lt = len(root.right)
+            root.right = self.constructTree(preorder, root.right, prestart - 1)
         else:
             lt = 0
-        if root.right != None:
-            root.right = self.constructTree(preorder, root.right, prestart + lt + 1)
+        if root.left != None:
+            root.left = self.constructTree(preorder, root.left, prestart - lt - 1)
         return root
 
-    def buildTree(self, preorder, inorder):
-        return self.constructTree(preorder, inorder, 0)
+    def buildTree(self, inorder, postorder):
+        return self.constructTree(postorder, inorder, len(postorder) - 1)
 
 
 
 A = Solution()
-pre = [2, 1, 6, 5, 3, 4]
-ino = [5, 6, 1, 2, 3, 4]
+ino = [7, 5, 6, 2, 3, 1, 4]
+post = [5, 6, 3, 1, 4, 2, 7]
 #             2
 #         1         3
 #     6                   4
 # 5
-root =  A.buildTree(pre,ino)
+root = A.buildTree(ino, post)
 print root.val
 print root.left.val
 print root.right.val
