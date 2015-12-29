@@ -15,7 +15,7 @@ class Solution:
         for i in range(1,m):
             for j in range(1,n):
                 if dp[i-1][j]>dp[i][j-1]:
-                    dp[i][j] = dp[i][j-1]
+                    dp[i][j] = dp[i][j - 1] + A[i][j]
                 else:
-                    dp[i][j] = dp[i-1][j]
+                    dp[i][j] = dp[i - 1][j] + A[i][j]
         return dp[m-1][n-1]
