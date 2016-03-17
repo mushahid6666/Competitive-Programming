@@ -8,7 +8,7 @@ class Solution:
     # @return an integer
     def threeSumClosest(self, A, B):
         min = sys.maxint
-        result = 0
+        result = []
         A.sort()
         for i in range(0, len(A)):
             j = i + 1
@@ -17,17 +17,23 @@ class Solution:
                 sm = A[i] + A[j] + A[k]
                 diff = abs(sm - B)
                 if (diff == 0):
-                    return sm
-                if diff < min:
-                    min = diff
-                    result = sm
+                    temp = [A[i], A[j], A[k]]
+                    result.append(temp)
                 if sm <= B:
                     j += 1
                 else:
                     k -= 1
+        dict = {}
+        for i in result:
+            if i in dict:
+                continue
+            else:
+                dict[i] = 0
+        print(dict)
+
         return result
 
 
 obj = Solution()
-arr = [-1, 2, 1, -4]
-print obj.threeSumClosest(arr, 1)
+arr = [-1, 0, 1, 2, -1, -4]
+print obj.threeSumClosest(arr, 0)

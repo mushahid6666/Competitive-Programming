@@ -1,7 +1,6 @@
 __author__ = 'mushahidalam'
 import math
 
-
 class Solution:
     # @param A : tuple of integers
     # @return an integer

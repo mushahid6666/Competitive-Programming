@@ -1,37 +1,66 @@
 class Solution:
     # @param A : list of integers
     # @return an integer
+    # def firstMissingPositive(self, A):
+    #     A.sort()
+    #     print(A)
+    #     # if '1' not in B:
+    #     #     return 1
+    #     lt = len(A)
+    #     if A[lt-1] <=0:
+    #         return 1
+    #     if lt ==1:
+    #         return A[0]+1
+    #     if A[lt-1] == 1:
+    #         return 2
+    #     for i in range(0,lt):
+    #         if i==0 and A[i]>1:
+    #             return 1
+    #         if A[i] >0:
+    #             try:
+    #                 if A[i-1] <=0 and A[i]!=1:
+    #                     return 1
+    #             except:
+    #                 pass
+    #             try:
+    #                 if A[i]+1 == A[i+1]:
+    #                     continue
+    #                 else:
+    #                     return A[i]+1
+    #             except:
+    #                 continue
+    #     return A[lt-1]+1
+    # @param A : list of integers
+    # @return an integer
+    def swap(self, arr, i, j):
+        temp = arr[i]
+        arr[i] = arr[j]
+        arr[j] = temp
+
+    def segregate(self, arr, size):
+        j = 0;
+        for i in range(0, size):
+            if arr[i] <= 0:
+                self.swap(arr, i, j)
+                j += 1
+        return j
+
+    def findmissingpostive(self, A, start, size):
+        for i in range(0, size):
+            if (abs(A[start + i]) - 1 < size) and (A[start + (abs(A[start + i]) - 1)] > 0):
+                A[start + (abs(A[start + i]) - 1)] = -A[start + (abs(A[start + i]) - 1)]
+        for i in range(0, size):
+            if A[i + start] > 0:
+                return i + 1
+        return size + 1
+
     def firstMissingPositive(self, A):
-        A.sort()
-        print(A)
-        # if '1' not in B:
-        #     return 1
-        lt = len(A)
-        if A[lt-1] <=0:
-            return 1
-        if lt ==1:
-            return A[0]+1
-        if A[lt-1] == 1:
-            return 2
-        for i in range(0,lt):
-            if i==0 and A[i]>1:
-                return 1
-            if A[i] >0:
-                try:
-                    if A[i-1] <=0 and A[i]!=1:
-                        return 1
-                except:
-                    pass
-                try:
-                    if A[i]+1 == A[i+1]:
-                        continue
-                    else:
-                        return A[i]+1
-                except:
-                    continue
-        return A[lt-1]+1
+        size = len(A)
+        shift = self.segregate(A, size)
+        return self.findmissingpostive(A, shift, size - shift)
+
 
 
 A = Solution()
-B = [ 894, 669, 852, 722, 778, 169, 247, 927, 875, 858, 396, 760, 318, 409, 640, 976, 419, 600, 711, 610, 864, 655, 859, 567, 7, 487, 953, 632, 544, 158, 53, 919, 45, 699, 493, 414, 586, 460, 339, 540, 12, 948, 515, 16, 116, 772, 529, 606, 684, 214, 724, 811, 925, 703, 454, 592, 330, 143, 41, 401, 570, 326, 885, 943, 836, 252, 119, 773, 768, 447, 581, 237, 380, 182, 457, 868, 667, 109, 702, 692, 542, 517, 966, 583, 983, 273, 641, 691, 985, 115, 574, 216, 372, 298, 411, 784, 95, 251, 389, 354, 964, 430, 991, 799, 824, 826, 714, 238, 967, 977, 291, 545, 355, 287, 425, 305, 118, 902, 479, 388, 19, 61, 301, 782, 688, 893, 673, 195, 971, 693, 797, 996, 3, 314, 353, 103, 391, 905, 316, 734, 54, 939, 648, 526, 448, 255, 690, 114, 715, 148, 376, 878, 483, 408, 804, 585, 79, 644, 621, 221, 345 ]
+B = [-10, -20, 0, 1, 2, 3]
 print A.firstMissingPositive(B)

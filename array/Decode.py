@@ -2,20 +2,20 @@ __author__ = 'mushahidalam'
 
 
 class Solution:
-    # @param A : string
+    # @param s : string
     # @return an integer
-    def numDecodings(self, A):
-        n = len(A)
+    def numDecodings(self, s):
+        n = len(s)
 
         if n == 0:
             return 0
         if n == 1:
-            if A[0] > '0':
+            if s[0] > '0':
                 return 1
             else:
                 return 0
 
-        if A[0] == '0':
+        if s[0] == '0':
             return 0
         result = [0] * (n + 1)
 
@@ -23,13 +23,13 @@ class Solution:
         result[1] = 1
 
         for i in range(2, n + 1):
-            if A[i - 1] > '0':
+            if s[i - 1] > '0':
                 result[i] = result[i - 1]
 
-            if (A[i - 2] > '0' and A[i - 2] < '2') or (A[i - 2] == '2' and A[i - 1] < '7'):
+            if (s[i - 2] > '0' and s[i - 2] < '2') or (s[i - 2] == '2' and s[i - 1] < '7'):
                 result[i] += result[i - 2]
 
-            if A[i - 1] == '0' and A[i - 2] > '2':
+            if s[i - 1] == '0' and s[i - 2] > '2':
                 return 0
 
         return result[n]

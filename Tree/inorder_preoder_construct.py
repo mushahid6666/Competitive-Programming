@@ -78,19 +78,19 @@ class Solution:
             root.left = self.constructTree(preorder, root.left, prestart - lt - 1)
         return root
 
-    def buildTree(self, inorder, postorder):
-        return self.constructTree(postorder, inorder, len(postorder) - 1)
+    def buildTree(self, inorder, preorder):
+        return self.constructTree(preorder, inorder, len(preorder) - 1)
 
 
 
 A = Solution()
 ino = [7, 5, 6, 2, 3, 1, 4]
-post = [5, 6, 3, 1, 4, 2, 7]
+pre = [5, 6, 3, 1, 4, 2, 7]
 #             2
 #         1         3
 #     6                   4
 # 5
-root = A.buildTree(ino, post)
+root = A.buildTree(ino, pre)
 print root.val
 print root.left.val
 print root.right.val
