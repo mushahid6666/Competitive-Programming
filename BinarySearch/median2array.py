@@ -7,8 +7,8 @@ class Solution:
     # @param B : tuple of gers
     # @return a double
     def findMedianSortedArrays(self, A, B):
-        i = 0;  # Current index of i/p array ar1[] */
-        j = 0; # Current index of i/p array ar2[] */
+        i = 0;  # Current index of i/p array_problems ar1[] */
+        j = 0; # Current index of i/p array_problems ar2[] */
         m1 = -1, m2 = -1;
 
         # Since there are 2n elements, median will be average

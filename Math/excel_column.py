@@ -1,26 +1,29 @@
 __author__ = 'mushahidalam'
+import string
 class Solution:
     # @param A : string
     # @return an integer
-    def titleToNumber(self, A):
-        alpha = {}
-        for i in range(0,27):
-            key = ord('A')+i
-            alpha[key] = i+1
-        if len(A)==1:
-            return alpha[ord(A)]
-        column =1
-        lt = len(A)
-        if len(A) > 1:
-            for i in range(0,len(A)):
-                # print(A[i])
-                if i == len(A)-1:
-                    return column+alpha[ord(A[i])]
-                if i==0:
-                    column = column*alpha[ord(A[lt-i-2])]*26
-                else:
-                    column = column*alpha[ord(A[lt-i-2])]*27
-
-
+    #Leetcode Attempt 2:
+    def titleToNumber(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        alphabets = string.ascii_uppercase
+        alphabet_dict = dict()
+        counter = 1
+        for letter in alphabets:
+            alphabet_dict[letter] = counter
+            counter += 1
+        column_number =0
+        if len(s) == 1:
+            return alphabet_dict[s[0]]
+        for i in range(len(s)):
+            column_number = column_number* 26 + alphabet_dict[s[i]]
+        return column_number
 obj = Solution()
+print obj.titleToNumber('A')
+print obj.titleToNumber('AB')
+print obj.titleToNumber('ZY')
 print obj.titleToNumber('AAA')
+

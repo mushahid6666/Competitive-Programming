@@ -18,7 +18,7 @@ dictionaryOfIndices = dict();  # map to maintain the index to word mappings
 
 
 ##Step 1 : Create a duplicate list of word objects which maintains index flag.
-##Step 2 : Sort each word in the duplicate array wrt to its letters
+##Step 2 : Sort each word in the duplicate array_problems wrt to its letters
 ##Step 3 : Sort the word list
 ##Step 4 : Now since the list is sorted, if a word does not have its next element equal to itself then it does not have an anagram
 ##Step 5 : If not anagram then set its index as -1 to indicate that its not an anagram
