@@ -4,6 +4,48 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
+        if len(s)==0:
+            return 0
+        self.longSubStr = 0
+        curCharSet = set()
+        i = 0
+        j = 0
+        while i< len(s) and j < len(s):
+            if j < len(s) and s[j] not in curCharSet:
+                curCharSet.add(s[j])
+                self.longSubStr = max(self.longSubStr, j-i + 1)
+                j += 1
+
+            else:
+                curCharSet.remove(s[i])
+                i+=1
+        return self.longSubStr
+
+    def lengthOfLongestSubstring2(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        if len(s)==0:
+            return 0
+        self.longSubStr = 0
+        def checkIfNoRepeating(s, startIndex, Index, curCharSet):
+            while Index < len(s) and s[Index] not in curCharSet:
+                curCharSet.add(s[Index])
+                Index += 1
+            subStr = s[startIndex:Index]
+            if len(subStr) > self.longSubStr:
+                self.longSubStr = len(subStr)
+
+        for i in range(len(s)):
+            checkIfNoRepeating(s,i, i, set())
+        return self.longSubStr
+
+    def lengthOfLongestSubstring1(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
         if len(s) == 0:
             return 0
         if len(s) == 1:

@@ -2,8 +2,36 @@ __author__ = 'mushahidalam'
 
 
 class Solution(object):
+
+    def markIslandVisited(self, grid, visited, i , j):
+        if i >= len(grid) or j >= len(grid[0]) or i<0 or j <0:
+            return
+        if grid[i][j]=="1" and visited[i][j]==0:
+            visited[i][j]=1
+            self.markIslandVisited(grid, visited, i+1, j)
+            self.markIslandVisited(grid, visited, i , j +1)
+            self.markIslandVisited(grid, visited, i - 1, j)
+            self.markIslandVisited(grid, visited, i , j - 1)
+
+    def numIslands(self, grid):
+        """
+        :type grid: List[List[str]]
+        :rtype: int
+        """
+        numIslands = 0
+        if len(grid) == 0:
+            return 0
+        visited = [[0 for _ in range(len(grid[0]))]for _ in range(len(grid))]
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if grid[i][j] == "1" and visited[i][j]== 0:
+                    self.markIslandVisited(grid, visited, i , j)
+                    numIslands+=1
+        return numIslands
+
+
     #Attempt2:
-    def markVisited(self, grid, visited, i, j, rows, columns):
+    def markVisited2(self, grid, visited, i, j, rows, columns):
         if j >= columns or i >= rows or i < 0 or j < 0:
             return
         if grid[i][j] == "1" and visited[i][j] == "0":
@@ -14,7 +42,7 @@ class Solution(object):
             self.markVisited(grid, visited, i - 1, j, rows, columns)
         return
 
-    def numIslands(self, grid):
+    def numIslands2(self, grid):
         """
         :type grid: List[List[str]]
         :rtype: int
@@ -29,7 +57,7 @@ class Solution(object):
             for j in range(columns):
                 if grid[i][j] == "1" and visited[i][j] == "0":
                     island_count = island_count + 1
-                    self.markVisited(grid, visited, i, j, rows, columns)
+                    self.markVisited2(grid, visited, i, j, rows, columns)
         return island_count
 
 test_island =[
@@ -37,7 +65,7 @@ test_island =[
 ["1","1","0","1","0"],
 ["1","1","0","0","0"],
 ["0","0","0","0","0"]
-    ]
+]
 solutionObj = Solution()
 print solutionObj.numIslands(test_island)
 

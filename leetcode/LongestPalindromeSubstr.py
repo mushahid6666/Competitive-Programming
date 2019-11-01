@@ -5,6 +5,12 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
+
+    def longestPalindrome1(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
         #Attempt2
         strLen = len(s)
         if strLen == 0 or strLen == 1:
@@ -90,8 +96,8 @@ obj = Solution()
 # print "String : " + str + " LPali : " + obj.longestPalindrome(str)
 # str = "cbbd"
 # print "String : " + str + " LPali : " + obj.longestPalindrome(str)
-# str = "abbacca"
-# print "String : " + str + " LPali : " + obj.longestPalindrome(str)
+str = "abbacca"
+print "String : " + str + " LPali : " + obj.longestPalindrome1(str)
 # str = "adbda"
 # print "String : " + str + " LPali : " + obj.longestPalindrome(str)
 # str = "papapjsjsj"
@@ -99,4 +105,4 @@ obj = Solution()
 # str = "abcda"
 # print "String : " + str + " LPali : " + obj.longestPalindrome(str)
 str = "ac"
-print "String : " + str + " LPali : " + obj.longestPalindrome(str)
+# print "String : " + str + " LPali : " + obj.longestPalindrome(str)
