@@ -1,5 +1,96 @@
 #Attempt2 Leetcode optimal solution
+import heapq
 class Solution(object):
+    def compare(self, a, b):
+        if a[0] < b[0]:
+            return -1
+        elif a[0] > b[0]:
+            return 1
+        else:
+            return 0
+    def minMeetingRooms(self, intervals):
+        """
+        :type intervals: List[List[int]]
+        :rtype: int
+        """
+        if len(intervals) == 0:
+            return 0
+        if len(intervals) == 1:
+            return 1
+        intervals.sort(self.compare)
+        rooms = [intervals[0][1]]
+        for i in range(1, len(intervals)):
+            cur_interval = intervals[i]
+            if cur_interval[0] >= rooms[0]:
+                heapq.heappop(rooms)
+                heapq.heappush(rooms, cur_interval[1])
+            else:
+                rooms.append(cur_interval[1])
+                heapq.heapify(rooms)
+        return len(rooms)
+
+
+class Solution5(object):
+    def compare(self, a, b):
+        if a[0] < b[0]:
+            return -1
+        elif a[0] > b[0]:
+            return 1
+        else:
+            return 0
+
+    def minMeetingRooms(self, intervals):
+        """
+        :type intervals: List[List[int]]
+        :rtype: int
+        """
+        if len(intervals) == 0:
+            return 0
+        if len(intervals) == 1:
+            return 1
+
+        intervals.sort(self.compare)
+        rooms = [intervals[0]]
+        total_rooms = 1
+        for i in range(1, len(intervals)):
+            cur_interval = intervals[i]
+            allocated = False
+            for j in range(len(rooms)):
+                if rooms[j][1] < cur_interval[1] and cur_interval[0] >= rooms[j][1]:
+                    rooms[j] = cur_interval
+                    allocated = True
+                    break
+            if not allocated:
+                rooms.append(cur_interval)
+                total_rooms +=1
+        return total_rooms
+
+
+
+
+
+
+
+
+
+
+obj = Solution()
+intervals = [[1,13], [13,15]]
+print obj.minMeetingRooms(intervals)
+
+intervals = [[0, 30],[5, 10],[9, 20]]
+print obj.minMeetingRooms(intervals)
+
+intervals = [[0, 30],[5, 10],[15, 20]]
+print obj.minMeetingRooms(intervals)
+
+intervals = [[7,10],[2,4]]
+print obj.minMeetingRooms(intervals)
+
+intervals = [[7,10]]
+print obj.minMeetingRooms(intervals)
+
+class Solution1(object):
     def minMeetingRooms(self, intervals):
         """
         :type intervals: List[List[int]]
@@ -29,18 +120,6 @@ class Solution(object):
                 meeting_room_count += 1
                 i+=1
         return meeting_room_count
-
-obj = Solution()
-intervals = [[0, 30],[5, 10],[15, 20]]
-print obj.minMeetingRooms(intervals)
-
-intervals = [[7,10],[2,4]]
-print obj.minMeetingRooms(intervals)
-
-intervals = [[7,10]]
-print obj.minMeetingRooms(intervals)
-
-
 
 #Previous attempted passed leetcode solution
 class Solution2(object):
